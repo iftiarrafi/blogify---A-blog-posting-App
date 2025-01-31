@@ -26,7 +26,7 @@ const Navbar = () => {
             to="/"
             className="text-gray-100 text-3xl font-sans font-semibold"
           >
-            Blogify
+            Blogify<span className="text-red-500">.</span>
           </Link>
           {/* Hamburger Icon */}
           <div className="lg:hidden">
@@ -57,13 +57,13 @@ const Navbar = () => {
           <div className="hidden lg:flex space-x-8">
             <Link
               to="/"
-              className="text-gray-100 text-lg font-medium hover:text-blue-400 transition duration-300"
+              className="text-gray-100 text-lg font-medium hover:text-red-400 transition duration-300"
             >
               Home
             </Link>
             <Link
               to="/about"
-              className="text-gray-100 text-lg font-medium hover:text-blue-400 transition duration-300"
+              className="text-gray-100 text-lg font-medium hover:text-red-400 transition duration-300"
             >
               About
             </Link>
@@ -71,13 +71,13 @@ const Navbar = () => {
               <>
                 <Link
                   to="/auth/profile"
-                  className="text-gray-100 text-lg font-medium hover:text-blue-400 transition duration-300"
+                  className="text-gray-100 text-lg font-medium hover:text-red-400 transition duration-300"
                 >
                   Profile
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="text-gray-100 text-lg font-medium hover:text-blue-400 transition duration-300"
+                  className="text-gray-100 text-lg font-medium hover:text-red-400 transition duration-300"
                 >
                   Logout
                 </button>
@@ -86,13 +86,13 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className="text-gray-100 text-lg font-medium hover:text-blue-400 transition duration-300"
+                  className="text-gray-100 text-lg font-medium hover:text-red-400 transition duration-300"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="text-gray-100 text-lg font-medium hover:text-blue-400 transition duration-300"
+                  className="text-gray-100 text-lg font-medium hover:text-red-400 transition duration-300"
                 >
                   Register
                 </Link>
@@ -105,15 +105,12 @@ const Navbar = () => {
       {/* Mobile Navigation Menu (visible when isMenuOpen is true) */}
       {isMenuOpen && (
         <div className="lg:hidden bg-gray-800 text-gray-100 space-y-4 p-4">
-          <Link
-            to="/"
-            className="block text-lg font-medium hover:text-blue-400"
-          >
+          <Link to="/" className="block text-lg font-medium hover:text-red-400">
             Home
           </Link>
           <Link
             to="/about"
-            className="block text-lg font-medium hover:text-blue-400"
+            className="block text-lg font-medium hover:text-red-400"
           >
             About
           </Link>
@@ -121,13 +118,13 @@ const Navbar = () => {
             <>
               <Link
                 to="/auth/profile"
-                className="block text-lg font-medium hover:text-blue-400"
+                className="block text-lg font-medium hover:text-red-400"
               >
                 Profile
               </Link>
               <button
                 onClick={handleLogout}
-                className="block text-lg font-medium hover:text-blue-400"
+                className="block text-lg font-medium hover:text-red-400"
               >
                 Logout
               </button>
@@ -136,13 +133,13 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="block text-lg font-medium hover:text-blue-400"
+                className="block text-lg font-medium hover:text-red-400"
               >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="block text-lg font-medium hover:text-blue-400"
+                className="block text-lg font-medium hover:text-red-400"
               >
                 Register
               </Link>

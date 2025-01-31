@@ -1,5 +1,3 @@
-
-
 <?php
 
 use App\Http\Controllers\AuthController;
@@ -12,12 +10,17 @@ Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']); // Sanctum auth for logout
 
 Route::get('blogs', [BlogController::class, 'index']);
-Route::get('blogs/{id}', [BlogController::class, 'show']);
 
 
 // Blog routes protected by Sanctum middleware
 Route::middleware('auth:sanctum')->group(function () {
+    /*create blog*/
     Route::post('blogs', [BlogController::class, 'store']);
+    /*get specific user's blog*/
+    Route::get('/users/{id}/blogs', [BlogController::class, 'getUserBlogs']);
+    /*get specific blog*/
+    Route::get('blogs/{id}', [BlogController::class, 'show']);
+    /*update specific blog and delete*/
     Route::put('blogs/{id}', [BlogController::class, 'update']);
     Route::delete('blogs/{id}', [BlogController::class, 'destroy']);
 });

@@ -8,6 +8,7 @@ import About from "./pages/About.jsx";
 
 import Protected from "./components/Protected.jsx";
 import Register from "./pages/Register.jsx";
+import OthersProfile from "./pages/OthersProfile.jsx";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
 
         <Route path="/auth" element={<Protected />}>
           <Route path="profile" element={<Profile />} />
+          <Route path="other/:id" element={<OthersProfile />} />
         </Route>
       </Routes>
 

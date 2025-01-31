@@ -30,7 +30,7 @@ class AuthController extends Controller
     
             return response()->json(['token' => $token ,'user' => $user], 201);
         }  catch (\Exception $e) {
-            Log::error('Error registering user:', ['error' => $e->getMessage()]);
+            // Log::error('Error registering user:', ['error' => $e->getMessage()]);
             return response()->json(['message' => 'Something went wrong!'], 500);
         }
         
@@ -70,7 +70,7 @@ class AuthController extends Controller
     
             return response()->json(['message' => 'Logged out successfully']);
         } catch (\Exception $e) {
-            Log::error('Error logging out', ['error' => $e->getMessage()]);
+            // Log::error('Error logging out', ['error' => $e->getMessage()]);
             return response()->json(['message' => 'Something went wrong!'], 500);
         }
        

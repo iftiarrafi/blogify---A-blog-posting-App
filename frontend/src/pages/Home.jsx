@@ -17,6 +17,10 @@ const Home = () => {
     }
   }, [dispatch, token, navigate]);
 
+  const otherprofilepage = (id) => {
+    navigate(`auth/other/${id}`);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-12">
@@ -34,14 +38,17 @@ const Home = () => {
                 <div className="p-6">
                   <h3 className="text-2xl font-semibold text-gray-800 mb-4">
                     {blog.title}
-                    <p className="mt-2 text-sm text-gray-500">
+                    <p
+                      className="mt-2 text-sm text-gray-500"
+                      onClick={() => otherprofilepage(blog.id)}
+                    >
                       Author : {blog.user ? blog.user.name : "Unknown"}
                     </p>
                   </h3>
                   <div className="relative">
                     {blog.image ? (
                       <img
-                        src={blog.image}
+                        src={`http://127.0.0.1:8000/storage/${blog.image}`}
                         alt="Blog"
                         className="w-full h-64 object-cover"
                       />

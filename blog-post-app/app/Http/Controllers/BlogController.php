@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -13,10 +14,10 @@ class BlogController extends Controller
     public function index()
     {
         try {
-            $blogs = Blog::with('user')->get();
+            $blogs = Blog::with('user')->latest()->get();
             return response()->json(['blogs' => $blogs , 'message' => 'Here are your blogs!']);
         }  catch (\Exception $e) {
-            Log::error('Error fetching all blogs', ['error' => $e->getMessage()]);
+           
             return response()->json(['message' => 'Something went wrong!'], 500);
         }
         
@@ -32,7 +33,7 @@ class BlogController extends Controller
     // Create a blog post with image upload
     public function store(Request $request)
 {
-    Log::info('Request received:', $request->all());
+    
 
     $request->validate([
         'title' => 'required|string|max:255',
@@ -55,7 +56,7 @@ class BlogController extends Controller
 
         return response()->json($blog, 201);
     } catch (\Exception $e) {
-        Log::error('Error creating blog:', ['error' => $e->getMessage()]);
+        
         return response()->json(['message' => 'Something went wrong!'], 500);
     }
 }
@@ -108,4 +109,28 @@ class BlogController extends Controller
 
         return response()->json(['message' => 'Blog deleted successfully']);
     }
+
+    //get specific user's blogs
+    public function getUserBlogs($id)
+    {
+        // Check if the user exists
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'User not found',
+            ], 404);
+        }
+
+        // Fetch blogs of the user with the user relationship
+        $blogs = Blog::with('user')
+            ->where('user_id', $id)
+            ->latest()
+            ->get();
+        
+            return response()->json([
+                'blogs' => $blogs,
+                'message' => 'Blogs fetched successfully',
+            ]);
+        }
 }

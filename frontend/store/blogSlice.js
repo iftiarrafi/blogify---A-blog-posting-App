@@ -13,18 +13,24 @@ export const fetchBlogs = createAsyncThunk("blogs/fetchBlogs", async () => {
 
 export const createBlog = createAsyncThunk(
     "blogs/createBlog",
-    async ({ title, content }) => {
-        const response = await axios.post(
-            "http://127.0.0.1:8000/api/blogs",
-            { title, content },
-            {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-            }
-        );
-        return response.data;
+    async (formData, { rejectWithValue }) => {
+        try {
+            const response = await axios.post(
+                "http://127.0.0.1:8000/api/blogs",
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
     }
+
 );
 
 export const blogSlice = createSlice({
